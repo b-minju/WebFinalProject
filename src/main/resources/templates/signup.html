@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f0f0f0;
+    }
+    .main-title {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .main-title :hover{
+      color: dimgrey;
+    }
+    .content {
+      border: 1px solid #000;
+      padding: 20px;
+      padding-top: 0;
+      width: 300px;
+      background: white;
+    }
+    h2 {
+      text-align: center;
+    }
+    input {
+      width: 90%;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 5px;
+      background-color: #f0f0f0;
+      border: 1px solid #000;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <a href="home.html" style="text-decoration: none; color: black;" class="main-title"><h1>My Page</h1></a>
+  <div class="content">
+    <h2>회원가입</h2>
+    <form>
+      <table>
+        <tr>
+          <td>
+            <input type="text" placeholder="name" required>
+          </td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" placeholder="id" required>
+          </td>
+          <td>
+            <button type="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;중복확인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          </td>
+        </tr>
+        <tr>
+          <td><input type="password" placeholder="pw" required><br></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td><input type="password" placeholder="pw 확인" required><br></td>
+          <td></td>
+        </tr>
+      </table>
+      <br>
+      <button type="submit">&nbsp;회원가입&nbsp;</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f0f0f0;
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .topNav{
+            margin-top: 24px;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        .nav-link {
+            color : black;
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            color : white;
+            background-color: black;
+        }
+        .main-title {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        .content {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .portfolio {
+            flex: 1;
+            border: 1px solid #000;
+            padding: 10px;
+        }
+        .sidebar {
+            flex: 1;
+            padding: 10px;
+            padding-top: 0;
+        }
+        .underbar {
+            flex: 1;
+            border: 1px solid #000;
+            padding: 10px;
+        }
+        .sidemenu{
+            flex: 1;
+            border: 1px solid #000;
+            padding: 10px;
+            padding-bottom: 90px;
+            margin-bottom: 20px;
+        }
+        .sidebar-title {
+            border-bottom: 1px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .sideNav{
+            font-size: large;
+            margin-top: 10px;
+        }
+
+        table {
+            margin: 20px;
+        }
+        input{
+            width: 80%;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        button{
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+
+        /* 모달 스타일 추가 */
+        .modal {
+            display: none; /* 초기에는 숨김 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* 반투명 배경 */
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .close-button {
+            cursor: pointer;
+            float: right;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <nav class="topNav">
+            <a href="notice.html" class="nav-link" target="_blank">공지사항</a>
+        </nav>
+        <nav class="topNav">
+            <a href="javascript:void(0)" onclick="openModal('loginModal')" class="nav-link">로그인</a>
+            &nbsp;
+            <a href="signup.html" target="_blank" class="nav-link">회원가입</a>
+        </nav>
+    </header>
+    <h1 class="main-title">My Page</h1>
+    <div class="content">
+        <div class="portfolio">
+            <a href="https://ajar-pram-6e3.notion.site/f2f25c4ff70d421083430ef06fd3ad8a?pvs=4"
+                target="_blank">
+                <img src="https://velog.velcdn.com/images/chen4023/post/f84b9ba8-d151-4594-9365-857af684d82f/image.png"
+                     alt="My Portfolio" style="width:100%;" title="My Portfolio">
+            </a>
+        </div>
+        <div class="sidebar">
+            <div class="sidemenu">
+                <h2 class="sidebar-title">&nbsp;&nbsp;Menu</h2>
+                <nav>
+                    <div class="sideNav">
+                        &nbsp;&nbsp;<a href="notice.html" class="nav-link" target="_blank">
+                        ♡‧₊˚&nbsp;Notice page
+                        </a>
+                    </div>
+                    <div class="sideNav">
+                        &nbsp;&nbsp;<a href="http://3.34.212.42/" class="nav-link" target="_blank">
+                        ♡‧₊˚&nbsp;My project-EcoAlign
+                    </a>
+                    </div>
+                </nav>
+            </div>
+            <div class="sidemenu">
+                <h2 class="sidebar-title">&nbsp;&nbsp;Menu</h2>
+                <nav>
+                    <div class="sideNav">
+                        &nbsp;&nbsp;<a href="https://github.com/KIMPROSMINJU" class="nav-link" target="_blank">
+                        ♡‧₊˚&nbsp;My github
+                    </a>
+                    </div>
+                    <div class="sideNav">
+                        &nbsp;&nbsp;<a href="https://blog.naver.com/m1nj00371" class="nav-link" target="_blank">
+                        ♡‧₊˚&nbsp;My blog
+                    </a>
+                    </div>
+                    <div class="sideNav">
+                        &nbsp;&nbsp;<a href="https://www.kopo.ac.kr/jungsu" class="nav-link" target="_blank">
+                        ♡‧₊˚&nbsp;My school
+                    </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="underbar">
+            <h2 class="sidebar-title">&nbsp;&nbsp;Contact me!</h2>
+            <div title="Feel free to contact me!">
+                &nbsp;&nbsp;BAK MINJU&nbsp;&nbsp;|&nbsp;&nbsp;b.m1nj00371@gmail.com&nbsp;&nbsp;|&nbsp;&nbsp;010-5270-3752
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 로그인 모달 -->
+<div class="modal" id="loginModal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal('loginModal')">×</span>
+        <h1>로그인</h1>
+        <form>
+            <table>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="id" required>
+                    </td>
+                    <td rowspan="2">
+                        <button type="submit" style="margin-left: 0; padding: 10px;">로그인</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="password" placeholder="pw" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="button" onclick="window.open('signup.html', '_blank')">회원가입</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button>아이디/비밀번호 찾기</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</div>
+
+<script>
+    // 모달 열기 함수
+    function openModal(modalId) {
+        document.getElementById(modalId).style.display = "flex";
+    }
+
+    // 모달 닫기 함수
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+    }
+
+    // ESC 키로 모달 닫기
+    window.addEventListener("keydown", function(event) {
+        if (event.key === "Escape") {
+            closeModal("signupModal");
+            closeModal("loginModal");
+        }
+    });
+</script>
+
+</body>
+</html>

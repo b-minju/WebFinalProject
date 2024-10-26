@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background: white;
+            padding-top: 0;
+        }
+        .main-title {
+            text-align: center;
+            margin-bottom: 48px;
+            font-size: x-large;
+            text-decoration: none;
+            color: black;
+        }
+        .main-title :hover{
+            color: dimgrey;
+        }
+        h1 {
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f2f2f2;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <a href="home.html" class="main-title"><h1>My Page</h1></a>
+    <div class="container">
+        <h1>공지사항</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>글번호</th>
+                <th>제목</th>
+                <th>이름</th>
+                <th>날짜</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 데이터는 여기에 동적으로 추가될 것입니다 -->
+            </tbody>
+        </table>
+        <a href="#" class="button">등록</a>
+    </div>
+</div>
+</body>
+</html>
