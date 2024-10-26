@@ -130,6 +130,8 @@
         <nav class="topNav">
             <a href="javascript:void(0)" onclick="openModal('loginModal')" class="nav-link">로그인</a>
             &nbsp;
+            <a href="find.html" target="_blank" class="nav-link">계정찾기</a>
+            &nbsp;
             <a href="signup.html" target="_blank" class="nav-link">회원가입</a>
         </nav>
     </header>
@@ -194,7 +196,7 @@
 <div class="modal" id="loginModal">
     <div class="modal-content">
         <span class="close-button" onclick="closeModal('loginModal')">×</span>
-        <h1>로그인</h1>
+        <h2>로그인</h2>
         <form>
             <table>
                 <tr>
@@ -217,7 +219,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button>아이디/비밀번호 찾기</button>
+                        <button type="button" onclick="window.open('find.html', '_blank')">아이디/비밀번호 찾기</button>
                     </td>
                 </tr>
             </table>
