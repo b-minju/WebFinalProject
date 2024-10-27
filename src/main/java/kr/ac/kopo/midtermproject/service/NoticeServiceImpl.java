@@ -32,7 +32,7 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     public PageResultDTO<NoticeDTO, Object[]> getList(PageRequestDTO pageRequestDTO) {
         Function<Object[], NoticeDTO> fn = (en -> entityToDTO((Notice) en[0], (UserEntity) en[1]));
-        Page<Object[]> result = repository.searchPage(pageRequestDTO.getType(), pageRequestDTO.getKeyword(), pageRequestDTO.getPageable(Sort.by("bno").descending()));
+        Page<Object[]> result = repository.searchPage(pageRequestDTO.getType(), pageRequestDTO.getKeyword(), pageRequestDTO.getPageable(Sort.by("num").descending()));
         return new PageResultDTO<>(result, fn);
     }
 

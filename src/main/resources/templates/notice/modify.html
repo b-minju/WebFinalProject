@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Modify Notice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+        .main-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .main-title :hover {
+            color: dimgrey;
+        }
+        .container {
+            background: white;
+            border: 1px solid black;
+            padding: 20px;
+            border-radius: 5px;
+            width: 600px;
+        }
+        .close-btn {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin: 15px 30px;
+        }
+        .form-group label {
+            width: 100px;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .form-group textarea {
+            flex: 1;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            padding: 5px;
+            resize: none;
+        }
+        .submit-btn {
+            font-size: 15px;
+            padding: 10px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <a style="text-decoration: none; color: black;" class="main-title listBtn"><h1>My Page</h1></a>
+    <div class="container">
+        <span class="close-btn" onclick="window.close()">×</span>
+        <h2 style="text-align: center">공지사항 수정</h2>
+        <br>
+        <form action="/notice/modify" method="post" id="actionForm">
+            <div class="form-group">
+                <label for="writer">작성자</label>
+                <textarea id="writer" rows="1" readonly>[[${dto.writerName}]]</textarea>
+            </div>
+            <div class="form-group">
+                <label for="regDate">등록 날짜</label>
+                <textarea id="regDate" rows="1" readonly>[[${dto.regDate}]]</textarea>
+            </div>
+            <div class="form-group">
+                <label for="modDate">수정 날짜</label>
+                <textarea id="modDate" rows="1" readonly>[[${dto.modDate}]]</textarea>
+            </div>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <textarea id="title" rows="1">[[${dto.title}]]</textarea>
+            </div>
+            <div class="form-group">
+                <label for="content">내용</label>
+                <textarea id="content" rows="10">[[${dto.content}]]</textarea>
+            </div>
+            <br>
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <button type="submit" class="submit-btn modifyBtn" formaction="/notice/modify">저장</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" class="submit-btn removeBtn" formaction="/notice/remove">삭제</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script th:inline="javascript">
+    $(".listBtn").click(function () {
+        let actionForm = $("#actionForm");
+        actionForm.attr("action", "/notice/list").attr("method", "get").submit();
+    });
+</script>
+</body>
+</html>
