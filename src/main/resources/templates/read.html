@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+        .main-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+        .main-title :hover {
+            color: dimgrey;
+        }
+        .container {
+            background: white;
+            border: 1px solid black;
+            padding: 20px;
+            border-radius: 5px;
+            width: 600px;
+        }
+        .close-btn {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin: 15px 30px;
+        }
+        .form-group label {
+            width: 100px;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .form-group textarea {
+            flex: 1;
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            padding: 5px;
+            resize: none;
+        }
+        .submit-btn {
+            font-size: 15px;
+            padding: 10px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <a onclick="window.close()" style="text-decoration: none; color: black;" class="main-title"><h1>My Page</h1></a>
+    <div class="container">
+        <span class="close-btn" onclick="window.close()">×</span>
+        <h2 style="text-align: center">공지사항</h2>
+        <br>
+        <div class="form-group">
+            <label for="writer">작성자</label>
+            <textarea id="writer" rows="1" readonly></textarea>
+        </div>
+        <div class="form-group">
+            <label for="regDate">등록 날짜</label>
+            <textarea id="regDate" rows="1" readonly></textarea>
+        </div>
+        <div class="form-group">
+            <label for="modDate">수정 날짜</label>
+            <textarea id="modDate" rows="1" readonly></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="title">제목</label>
+            <textarea id="title" rows="1" readonly></textarea>
+        </div>
+        <div class="form-group">
+            <label for="content">내용</label>
+            <textarea id="content" rows="10" readonly></textarea>
+        </div>
+        <br>
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+            <button class="submit-btn" onclick="window.close()">닫기</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
