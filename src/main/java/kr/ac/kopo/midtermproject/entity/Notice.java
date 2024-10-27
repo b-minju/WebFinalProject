@@ -18,5 +18,5 @@ public class Notice extends BaseEntity{
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private User writer;
+    private UserEntity writer;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notice Detail</title>
+    <title>Modify Notice</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -56,7 +56,6 @@
             border-radius: 5px;
             cursor: pointer;
             border: 1px solid #000;
-            margin: 10px;
         }
     </style>
 </head>
@@ -65,7 +64,7 @@
     <a onclick="window.close()" style="text-decoration: none; color: black;" class="main-title"><h1>My Page</h1></a>
     <div class="container">
         <span class="close-btn" onclick="window.close()">×</span>
-        <h2 style="text-align: center">공지사항</h2>
+        <h2 style="text-align: center">공지사항 수정</h2>
         <br>
         <div class="form-group">
             <label for="writer">작성자</label>
@@ -82,16 +81,15 @@
 
         <div class="form-group">
             <label for="title">제목</label>
-            <textarea id="title" rows="1" readonly></textarea>
+            <textarea id="title" rows="1"></textarea>
         </div>
         <div class="form-group">
             <label for="content">내용</label>
-            <textarea id="content" rows="10" readonly></textarea>
+            <textarea id="content" rows="10"></textarea>
         </div>
         <br>
         <div style="display: flex; justify-content: center; margin-top: 20px;">
-            <button class="submit-btn" onclick="window.open('modify.html', '_blank')">수정</button>
-            <button class="submit-btn" onclick="window.close()">닫기</button>
+            <button class="submit-btn" onclick="window.close()">저장</button>
         </div>
     </div>
 </div>

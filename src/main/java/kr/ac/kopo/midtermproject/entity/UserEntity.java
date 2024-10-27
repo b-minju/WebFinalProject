@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @ToString
-public class User{
+public class UserEntity {
     @Id
     private String id;
     private String name;
