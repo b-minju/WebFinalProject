@@ -44,14 +44,14 @@
         th {
             background-color: #f2f2f2;
         }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #f2f2f2;
-            color: #333;
+
+        .nav-link {
+            color : black;
             text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
+        }
+        .nav-link:hover {
+            color : white;
+            background-color: black;
         }
         .submit-btn {
             margin-top: 30px;
@@ -61,6 +61,12 @@
             cursor: pointer;
             border: 1px solid #000;
         }
+        .search{
+            display: inline-block;
+            font-size: 15px;
+            margin: 10px 10px;
+            padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -68,6 +74,25 @@
     <a onclick="window.close()" class="main-title"><h1>My Page</h1></a>
     <div class="container">
         <h1>공지사항</h1>
+        <div>
+            <form action="/guestbook/list" method="get" id="searchForm" style="display: inline-flex;">
+                <input type="hidden" name="page" value="1">
+
+                <select name="type" class="form-select search">
+                    <option>검색 종류가 선택되지 않음</option>
+                    <option value="t">제목</option>
+                    <option value="c">내용</option>
+                    <option value="w">작성자</option>
+                    <option value="tc">제목+내용</option>
+                    <option value="tcw">제목+내용+작성자</option>
+                </select>
+
+                <input class="form-control search" type="text" name="keyword" placeholder="검색어를 입력하세요" style="width : 380px">
+
+                <button type="button" class="btn btn-outline-secondary btn-primary btn-search search" style="margin-right: 0">Search</button>
+                <button type="button" class="btn btn-outline-secondary btn-danger btn-cancel search">Cancel</button>
+            </form>
+        </div>
         <table>
             <thead>
             <tr>
@@ -81,6 +106,14 @@
             <!-- 데이터는 여기에 동적으로 추가될 것입니다 -->
             </tbody>
         </table>
+        <br>
+        <div style="display: flex; justify-content: center; margin-top: 20px;">
+            <a href="#" class="nav-link" target="_self">PREV</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="#" style="color : black; text-decoration: none;">NOW</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="#" class="nav-link" target="_self">NEXT</a>
+        </div>
         <div style="display: flex; justify-content: flex-end;">
             <button class="submit-btn" onclick="window.open('write.html', '_blank')">공지사항 등록</button>
         </div>
