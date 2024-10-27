@@ -14,7 +14,9 @@ public class Notice extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long num;
 
+    @Setter
     private String title;
+    @Setter
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
