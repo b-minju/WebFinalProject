@@ -53,6 +53,14 @@
             border-radius: 5px;
             margin-top: 20px;
         }
+        .submit-btn {
+            margin-top: 30px;
+            font-size: 15px;
+            padding: 5px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid #000;
+        }
     </style>
 </head>
 <body>
@@ -73,7 +81,9 @@
             <!-- 데이터는 여기에 동적으로 추가될 것입니다 -->
             </tbody>
         </table>
-        <a href="#" class="button">등록</a>
+        <div style="display: flex; justify-content: flex-end;">
+            <button class="submit-btn" onclick="window.open('write.html', '_blank')">공지사항 등록</button>
+        </div>
     </div>
 </div>
 </body>
