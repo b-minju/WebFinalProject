@@ -16,7 +16,7 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            border: 1px solid black;
+            border: 1px solid #121212;
             padding: 20px;
             background: white;
             padding-top: 0;
@@ -26,7 +26,7 @@
             margin-bottom: 48px;
             font-size: x-large;
             text-decoration: none;
-            color: black;
+            color: #121212;
         }
         .main-title:hover {
             color: dimgrey;
@@ -48,14 +48,16 @@
             background-color: #f2f2f2;
         }
         .nav-link {
-            color: black;
+            color: #121212;
             text-decoration: none;
         }
         .nav-link:hover {
             color: white;
-            background-color: black;
+            background-color: #121212;
         }
         .submit-btn {
+            text-decoration: none;
+            color: #121212;
             margin-top: 30px;
             font-size: 15px;
             padding: 5px 20px;
@@ -64,8 +66,15 @@
             border: 1px solid #000;
         }
         .submit-btn:hover {
-            background-color: black;
+            background-color: #121212;
             color: #f0f0f0;
+        }
+        .title {
+            color: #121212;
+        }
+        .title:hover {
+            color: #f0f0f0;
+            background-color: #121212;
         }
         .search {
             display: inline-block;
@@ -115,11 +124,11 @@
             <tr th:each="dto : ${result.dtoList}">
                 <td>[[${dto.num}]]</td>
                 <td>
-                    <a th:href="@{/notice/read(num=${dto.num}, page=${result.page}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">
+                    <a class="title" th:href="@{/notice/read(num=${dto.num}, page=${result.page}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">
                         [[${dto.title}]]
                     </a>
                 </td>
-                <td>[[${dto.writerName}]]</td>
+                <td>[[${dto.writerId}]]</td>
                 <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
             </tr>
             </tbody>
@@ -132,7 +141,7 @@
             &nbsp;&nbsp;&nbsp;
             <a th:class="${result.page == page ? 'active' : ''}" th:each="page : ${result.pageList}"
                th:href="@{/board/list(page=${page}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
-               style="color : black; text-decoration: none;">[[${page}]]</a>
+               style="color : #121212; text-decoration: none;">[[${page}]]</a>
             &nbsp;&nbsp;&nbsp;
             <a th:if="${result.next}" class="nav-link"
                th:href="@{/board/list(page=${result.end + 1}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">NEXT</a>

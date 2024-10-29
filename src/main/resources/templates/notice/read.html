@@ -23,7 +23,7 @@
         }
         .container {
             background: white;
-            border: 1px solid black;
+            border: 1px solid #121212;
             padding: 20px;
             border-radius: 5px;
             width: 600px;
@@ -32,6 +32,8 @@
             float: right;
             font-size: 24px;
             cursor: pointer;
+            background-color: white;
+            border: none;
         }
         .form-group {
             display: flex;
@@ -55,7 +57,7 @@
             padding: 10px 30px;
             border-radius: 5px;
             cursor: pointer;
-            border: 1px solid #000;
+            border: 1px solid #121212;
             margin: 10px;
         }
     </style>
@@ -64,40 +66,60 @@
 <div>
     <a onclick="window.close()" style="text-decoration: none; color: black;" class="main-title"><h1>My Page</h1></a>
     <div class="container">
-        <span class="close-btn" onclick="window.close()">×</span>
+        <a th:href="@{/notice/list(page=${requestDTO.page}, type=${requestDTO.type}, keyword=${requestDTO.keyword})}">
+            <button type="button" class="close-btn listBtn">×</button>
+        </a>
         <h2 style="text-align: center">공지사항</h2>
-        <br>
+        <h3 style="margin-left: 30px">글번호 : [[${dto.num}]]</h3>
         <div class="form-group">
+            <input type="hidden" name="num" th:value="${dto.num}"/>
             <label for="writer">작성자</label>
-            <textarea id="writer" rows="1" readonly>[[${dto.writerName}]]</textarea>
+            <textarea id="writer" name="writer" rows="1" readonly>[[${dto.writerName}]]</textarea>
         </div>
         <div class="form-group">
             <label for="regDate">등록 날짜</label>
-            <textarea id="regDate" rows="1" readonly>[[${dto.regDate}]]</textarea>
+            <textarea id="regDate" name="regDate" rows="1" readonly>[[${dto.regDate}]]</textarea>
         </div>
         <div class="form-group">
             <label for="modDate">수정 날짜</label>
-            <textarea id="modDate" rows="1" readonly>[[${dto.modDate}]]</textarea>
+            <textarea id="modDate" name="modDate" rows="1" readonly>[[${dto.modDate}]]</textarea>
         </div>
 
         <div class="form-group">
             <label for="title">제목</label>
-            <textarea id="title" rows="1" readonly>[[${dto.title}]]</textarea>
+            <textarea id="title" name="title" rows="1" readonly>[[${dto.title}]]</textarea>
         </div>
         <div class="form-group">
             <label for="content">내용</label>
-            <textarea id="content" rows="10" readonly>[[${dto.content}]]</textarea>
+            <textarea id="content" name="content" rows="10" readonly>[[${dto.content}]]</textarea>
         </div>
         <br>
         <div style="display: flex; justify-content: center; margin-top: 20px;">
             <a th:href="@{/notice/modify(num=${dto.num}, page=${requestDTO.page}, type=${requestDTO.type}, keyword=${requestDTO.keyword})}">
-                <button class="submit-btn" onclick="window.open('modify.html', '_blank')">수정</button>
+                <button class="submit-btn">수정</button>
             </a>
             <a th:href="@{/notice/list(page=${requestDTO.page}, type=${requestDTO.type}, keyword=${requestDTO.keyword})}">
-                <button class="submit-btn" onclick="window.close()">닫기</button>
+                <button class="submit-btn listBtn">닫기</button>
             </a>
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+    $(".listBtn").click(function () {
+        var page = $("input[name='page']");
+        var type = $("input[name='type']");
+        var keyword = $("input[name='keyword']");
+
+        actionForm.empty();
+
+        actionForm.append(page);
+        actionForm.append(type);
+        actionForm.append(keyword);
+
+        actionForm.attr("action", "/notice/list")
+            .attr("method", "get")
+            .submit();
+    });
+</script>
 </body>
 </html>

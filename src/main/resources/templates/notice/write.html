@@ -22,7 +22,7 @@
         }
         .container {
             background: white;
-            border: 1px solid black;
+            border: 1px solid #121212;
             padding: 20px;
             border-radius: 5px;
         }
@@ -30,6 +30,8 @@
             float: right;
             font-size: 24px;
             cursor: pointer;
+            background-color: white;
+            border: none;
         }
         h2 {
             margin-bottom: 10px;
@@ -44,7 +46,7 @@
             padding: 10px 30px;
             border-radius: 5px;
             cursor: pointer;
-            border: 1px solid #000;
+            border: 1px solid #121212;
         }
         input, textarea {
             font-family: Arial, sans-serif;
@@ -59,14 +61,16 @@
 <div>
     <a onclick="window.close()" style="text-decoration: none; color: black;" class="main-title"><h1>My Page</h1></a>
     <div class="container">
-        <span class="close-btn" onclick="window.close()">×</span>
+        <a th:href="@{/notice/list(page=${requestDTO.page}, type=${requestDTO.type}, keyword=${requestDTO.keyword})}">
+            <button type="button" class="close-btn listBtn">×</button>
+        </a>
         <br>
         <h1 id="title" style="text-align: center">공지사항 등록</h1>
         <br>
         <form th:action="@{/notice/write}" th:method="post">
         <div class="content">
-            <label><h2>작성자</h2></label>
-            <input type="text" name="name" placeholder="Enter name" id="name-input">
+            <label><h2>작성자 ID</h2></label>
+            <input type="text" name="writerId" placeholder="Enter ID" id="id-input">
             <br>
             <br>
             <label><h2>제목</h2></label>
@@ -74,13 +78,30 @@
             <br>
             <br>
             <label><h2>내용</h2></label>
-            <textarea id="content-input" placeholder="Enter Content" rows="10" cols="50"></textarea>
+            <textarea id="content-input" name="content" placeholder="Enter Content" rows="10" cols="50"></textarea>
         </div>
         <div style="display: flex; justify-content: center;">
-            <button type="submit" class="submit-btn" onclick="window.close()">등록</button>
+            <button type="submit" class="submit-btn">등록</button>
         </div>
         </form>
     </div>
 </div>
+<script th:inline="javascript">
+    $(".listBtn").click(function () {
+        var page = $("input[name='page']");
+        var type = $("input[name='type']");
+        var keyword = $("input[name='keyword']");
+
+        actionForm.empty();
+
+        actionForm.append(page);
+        actionForm.append(type);
+        actionForm.append(keyword);
+
+        actionForm.attr("action", "/notice/list")
+            .attr("method", "get")
+            .submit();
+    });
+</script>
 </body>
 </html>

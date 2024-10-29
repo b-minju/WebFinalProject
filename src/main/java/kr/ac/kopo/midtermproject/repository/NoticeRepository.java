@@ -5,7 +5,9 @@ import kr.ac.kopo.midtermproject.repository.search.SearchNoticeRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface NoticeRepository extends JpaRepository<Notice, Long>, SearchNoticeRepository {
     @Query("select n, w from Notice n left join n.writer w where n.num=:num")
     Object getNoticeWithWriter(@Param("num") Long num);
@@ -14,4 +16,7 @@ public interface NoticeRepository extends JpaRepository<Notice, Long>, SearchNot
             + "from Notice n left join n.writer w "
             + "where n.num=:num group by n, w")
     Object getNoticeByNum(@Param("num")Long num);
+
+    @Query("SELECT n FROM Notice n WHERE n.num = :num")
+    Notice findByNum(@Param("num") Long num);
 }

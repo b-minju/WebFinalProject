@@ -13,7 +13,7 @@ public class NoticeDTO {
     private Long num;
     private String title;
     private String content;
-    private String writerName;
+    private String writerId;
     private LocalDateTime regDate;
     private LocalDateTime modDate;
 }

@@ -6,6 +6,7 @@ import kr.ac.kopo.midtermproject.dto.PageResultDTO;
 import kr.ac.kopo.midtermproject.entity.Notice;
 import kr.ac.kopo.midtermproject.entity.UserEntity;
 import kr.ac.kopo.midtermproject.repository.NoticeRepository;
+import kr.ac.kopo.midtermproject.repository.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
@@ -18,11 +19,16 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 public class NoticeServiceImpl implements NoticeService{
     private final NoticeRepository repository;
+    private final UserEntityRepository userEntityRepository;
 
     //    글 등록
     @Override
     public Long register(NoticeDTO dto) {
-        Notice notice = dtoToEntity(dto);
+        UserEntity writer = userEntityRepository.findById(dto.getWriterId()).get();
+        Notice notice = new Notice();
+        notice.setTitle(dto.getTitle());
+        notice.setContent(dto.getContent());
+        notice.setWriter(writer);
         repository.save(notice);
 
         return notice.getNum();
@@ -56,7 +62,7 @@ public class NoticeServiceImpl implements NoticeService{
     @Override
     @Transactional
     public void modify(NoticeDTO noticeDTO) {
-        Notice notice = repository.getReferenceById(noticeDTO.getNum());
+        Notice notice = repository.findByNum(noticeDTO.getNum());
         notice.setTitle(noticeDTO.getTitle());
         notice.setContent(noticeDTO.getContent());
 

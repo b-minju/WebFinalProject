@@ -23,7 +23,7 @@
         }
         .container {
             background: white;
-            border: 1px solid black;
+            border: 1px solid #121212;
             padding: 20px;
             border-radius: 5px;
             width: 600px;
@@ -32,6 +32,8 @@
             float: right;
             font-size: 24px;
             cursor: pointer;
+            background-color: white;
+            border: none;
         }
         .form-group {
             display: flex;
@@ -55,7 +57,7 @@
             padding: 10px 30px;
             border-radius: 5px;
             cursor: pointer;
-            border: 1px solid #000;
+            border: 1px solid #121212;
         }
     </style>
 </head>
@@ -63,43 +65,70 @@
 <div>
     <a style="text-decoration: none; color: black;" class="main-title listBtn"><h1>My Page</h1></a>
     <div class="container">
-        <span class="close-btn" onclick="window.close()">×</span>
+        <a th:href="@{/notice/list(page=${requestDTO.page}, type=${requestDTO.type}, keyword=${requestDTO.keyword})}">
+            <button type="button" class="close-btn listBtn">×</button>
+        </a>
         <h2 style="text-align: center">공지사항 수정</h2>
-        <br>
+        <h3 style="margin-left: 30px">글번호 : [[${dto.num}]]</h3>
         <form action="/notice/modify" method="post" id="actionForm">
+            <input type="hidden" name="num" th:value="${dto.num}"/>
             <div class="form-group">
                 <label for="writer">작성자</label>
-                <textarea id="writer" rows="1" readonly>[[${dto.writerName}]]</textarea>
+                <textarea id="writer" name="writer" rows="1" readonly>[[${dto.writerName}]]</textarea>
             </div>
             <div class="form-group">
                 <label for="regDate">등록 날짜</label>
-                <textarea id="regDate" rows="1" readonly>[[${dto.regDate}]]</textarea>
+                <textarea id="regDate" name="regDate" rows="1" readonly>[[${dto.regDate}]]</textarea>
             </div>
             <div class="form-group">
                 <label for="modDate">수정 날짜</label>
-                <textarea id="modDate" rows="1" readonly>[[${dto.modDate}]]</textarea>
+                <textarea id="modDate" name="modDate" rows="1" readonly>[[${dto.modDate}]]</textarea>
             </div>
             <div class="form-group">
                 <label for="title">제목</label>
-                <textarea id="title" rows="1">[[${dto.title}]]</textarea>
+                <textarea id="title" name="title" rows="1" required>[[${dto.title}]]</textarea>
             </div>
             <div class="form-group">
                 <label for="content">내용</label>
-                <textarea id="content" rows="10">[[${dto.content}]]</textarea>
+                <textarea id="content" name="content" rows="10">[[${dto.content}]]</textarea>
             </div>
             <br>
             <div style="display: flex; justify-content: center; margin-top: 20px;">
-                <button type="submit" class="submit-btn modifyBtn" formaction="/notice/modify">저장</button>
+                <button type="submit" class="submit-btn modifyBtn">저장</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <button type="submit" class="submit-btn removeBtn" formaction="/notice/remove">삭제</button>
+                <button type="submit" class="submit-btn removeBtn">삭제</button>
             </div>
         </form>
     </div>
 </div>
 <script th:inline="javascript">
+    let actionForm = $("form");
+    $(".removeBtn").click(function () {
+        actionForm.attr("action", "/notice/remove")
+            .attr("method", "post")
+            .submit()
+    });
+
+    $(".modifyBtn").click(function () {
+        actionForm.attr("action", "/notice/modify")
+            .attr("method", "post")
+            .submit()
+    });
+
     $(".listBtn").click(function () {
-        let actionForm = $("#actionForm");
-        actionForm.attr("action", "/notice/list").attr("method", "get").submit();
+        var page = $("input[name='page']");
+        var type = $("input[name='type']");
+        var keyword = $("input[name='keyword']");
+
+        actionForm.empty();
+
+        actionForm.append(page);
+        actionForm.append(type);
+        actionForm.append(keyword);
+
+        actionForm.attr("action", "/notice/list")
+            .attr("method", "get")
+            .submit();
     });
 </script>
 </body>

@@ -30,7 +30,7 @@ public interface NoticeService {
                 .content(notice.getContent())
                 .regDate(notice.getRegDate())
                 .modDate(notice.getModDate())
-                .writerName(user.getName())
+                .writerId(user.getName())
                 .build();
 
         return noticeDTO;
@@ -39,10 +39,10 @@ public interface NoticeService {
     //    DTO를 Entity로 변환하는 메소드(
     default Notice dtoToEntity(NoticeDTO dto){
         UserEntity user = UserEntity.builder()
-                .name(dto.getWriterName())
+                .id(dto.getWriterId())
                 .build();
 
-        Notice notice=Notice.builder()
+        Notice notice = Notice.builder()
                 .num(dto.getNum())
                 .title(dto.getTitle())
                 .content(dto.getContent())
