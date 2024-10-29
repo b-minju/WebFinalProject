@@ -30,7 +30,8 @@ public interface NoticeService {
                 .content(notice.getContent())
                 .regDate(notice.getRegDate())
                 .modDate(notice.getModDate())
-                .writerId(user.getName())
+                .writerName(user.getName())
+                .writerId(user.getId())
                 .build();
 
         return noticeDTO;

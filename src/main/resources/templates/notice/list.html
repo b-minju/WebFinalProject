@@ -91,7 +91,7 @@
         <h2>공지사항</h2>
         <!-- 검색 화면 구성 START : 검색 타입과 검색어 입력 가능 -->
         <div>
-            <form action="/guestbook/list" method="get" id="searchForm" style="display: inline-flex;">
+            <form action="/notice/list" method="get" id="searchForm" style="display: inline-flex;">
                 <input type="hidden" name="page" value="1">
 
                 <select name="type" class="form-select search">
@@ -128,7 +128,7 @@
                         [[${dto.title}]]
                     </a>
                 </td>
-                <td>[[${dto.writerId}]]</td>
+                <td>[[${dto.writerName}]]</td>
                 <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
             </tr>
             </tbody>
@@ -136,15 +136,15 @@
         <br>
         <div style="display: flex; justify-content: center; margin-top: 20px;">
             <a th:if="${result.prev}" class="nav-link"
-               th:href="@{/board/list(page=${result.start - 1}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
+               th:href="@{/notice/list(page=${result.start - 1}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
                tabindex="-1">PREV</a>
             &nbsp;&nbsp;&nbsp;
             <a th:class="${result.page == page ? 'active' : ''}" th:each="page : ${result.pageList}"
-               th:href="@{/board/list(page=${page}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
+               th:href="@{/notice/list(page=${page}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
                style="color : #121212; text-decoration: none;">[[${page}]]</a>
             &nbsp;&nbsp;&nbsp;
             <a th:if="${result.next}" class="nav-link"
-               th:href="@{/board/list(page=${result.end + 1}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">NEXT</a>
+               th:href="@{/notice/list(page=${result.end + 1}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">NEXT</a>
         </div>
         <div style="display: flex; justify-content: flex-end;">
             <a class="submit-btn" th:href="@{/notice/write}" th:target="_blank">공지사항 등록</a>
