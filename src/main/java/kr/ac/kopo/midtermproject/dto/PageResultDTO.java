@@ -38,17 +38,20 @@ public class PageResultDTO<DTO, EN> {
         makePageList(result.getPageable());
     }
 
-    private void makePageList(Pageable pageable){
-        this.page = pageable.getPageNumber() + 1;
-        this.size = pageable.getPageSize();
-//        현재 화면에 보여질 임시 마지막 페이지 번호
-        int temEnd = (int)(Math.ceil(page/10.0)) * 10;
+    private void makePageList(Pageable pageable) {
+        this.page = pageable.getPageNumber() + 1; // 현재 페이지
+        this.size = pageable.getPageSize(); // 페이지당 크기
+
+        // 임시 마지막 페이지 계산
+        int temEnd = (int)(Math.ceil(page / 10.0)) * 10;
         start = temEnd - 9;
-//        삼항조건연산자에서 조건식 true면 마지막 화면이 아닌경우 false면 마지막화면이라는 의미
-//        전체페이지번호가 31일때: 마지막 화면이 아닌경우 1 ~ 3번째 화면(10, 20, 30), 마지막 화면은 4번째 화면을 의미(31)
-        end = totalPage > temEnd ? temEnd: totalPage;
+
+        // 마지막 페이지 번호 계산
+        end = Math.min(totalPage, temEnd); // 전체 페이지 수와 비교
+
         pageList = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
-        prev = start > 1; //2~마지막 화면까지 true
-        next = totalPage > temEnd;//1~마지막바로 전화면까지 true
+        prev = start > 1; // 시작 페이지보다 큰 경우
+        next = totalPage > temEnd; // 전체 페이지 수보다 큰 경우
     }
+
 }

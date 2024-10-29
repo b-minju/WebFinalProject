@@ -82,6 +82,10 @@
             margin: 10px 10px;
             padding: 5px;
         }
+        .active {
+            font-weight: bold;
+            background-color: #f0f0f0;
+        }
     </style>
 </head>
 <body>
@@ -139,13 +143,17 @@
                th:href="@{/notice/list(page=${result.start - 1}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
                tabindex="-1">PREV</a>
             &nbsp;&nbsp;&nbsp;
-            <a th:class="${result.page == page ? 'active' : ''}" th:each="page : ${result.pageList}"
+            <a th:each="page : ${result.pageList}"
+               th:class="${result.page == page ? 'active' : ''}"
                th:href="@{/notice/list(page=${page}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}"
-               style="color : #121212; text-decoration: none;">[[${page}]]</a>
+               style="color: #121212; text-decoration: none; padding: 0 3px; margin: 0 5px;">
+                [[${page}]]
+            </a>
             &nbsp;&nbsp;&nbsp;
             <a th:if="${result.next}" class="nav-link"
                th:href="@{/notice/list(page=${result.end + 1}, type=${pageRequestDTO.type}, keyword=${pageRequestDTO.keyword})}">NEXT</a>
         </div>
+
         <div style="display: flex; justify-content: flex-end;">
             <a class="submit-btn" th:href="@{/notice/write}" th:target="_blank">공지사항 등록</a>
         </div>
