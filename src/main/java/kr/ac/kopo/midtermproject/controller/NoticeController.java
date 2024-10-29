@@ -24,8 +24,8 @@ public class NoticeController {
     }
 
     @GetMapping("/write")
-    public void write() {
-
+    public void write(PageRequestDTO pageRequestDTO, Model model) {
+        model.addAttribute("requestDTO", pageRequestDTO);
     }
 
     @PostMapping("/write")
