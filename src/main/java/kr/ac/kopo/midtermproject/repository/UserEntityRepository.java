@@ -11,7 +11,4 @@ import java.util.Optional;
 @Repository
 public interface UserEntityRepository extends JpaRepository<UserEntity, String> {
 
-    @EntityGraph(attributePaths = {"roleSet"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("select u from UserEntity u where u.id = :id")
-    Optional<UserEntity> findById(String id);
 }
