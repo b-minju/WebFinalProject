@@ -130,9 +130,9 @@
         <nav class="topNav">
             <a href="javascript:void(0)" onclick="openModal('loginModal')" class="nav-link">로그인</a>
             &nbsp;
-            <a href="find.html" target="_blank" class="nav-link">계정찾기</a>
+            <a href="find.html" th:href="@{/find/user}" th:target="_blank" class="nav-link">계정찾기</a>
             &nbsp;
-            <a href="signup.html" target="_blank" class="nav-link">회원가입</a>
+            <a href="signup.html" th:href="@{/signup}" th:target="_blank" class="nav-link">회원가입</a>
         </nav>
     </header>
     <h1 class="main-title">My Page</h1>
@@ -214,12 +214,12 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button type="button" onclick="window.open('signup.html', '_blank')">회원가입</button>
+                        <button type="button" onclick="window.open('/signup', '_blank')">회원가입</button>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button type="button" onclick="window.open('find.html', '_blank')">아이디/비밀번호 찾기</button>
+                        <button type="button" onclick="window.open('/find/user', '_blank')">아이디/비밀번호 찾기</button>
                     </td>
                 </tr>
             </table>

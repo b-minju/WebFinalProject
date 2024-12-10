@@ -1,6 +1,5 @@
 package kr.ac.kopo.midtermproject.controller;
 
-import kr.ac.kopo.midtermproject.dto.PageRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,16 +8,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class MyPageController {
-    @GetMapping("/my_page")
-    public String home(Model model) {
-        return "home";
+@RequestMapping("/find")
+public class FindController {
+
+    @GetMapping("/user")
+    public String find(Model model) {
+        return "find";
     }
 
-    @GetMapping("/signup")
-    public String signup(Model model) {
-        return "signup";
+    @GetMapping("/findId")
+    public String findId(Model model) {
+        return "findId";
     }
 
-
+    @GetMapping("/findPw")
+    public String findPw(Model model) {
+        return "findPw";
+    }
 }
