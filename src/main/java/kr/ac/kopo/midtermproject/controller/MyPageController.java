@@ -19,6 +19,4 @@ public class MyPageController {
     public String signup(Model model) {
         return "signup";
     }
-
-
 }
