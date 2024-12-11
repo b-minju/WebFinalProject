@@ -5,7 +5,7 @@ import kr.ac.kopo.midtermproject.entity.UserEntity;
 import kr.ac.kopo.midtermproject.repository.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,7 +14,7 @@ public class UserEntityServiceImpl implements UserEntityService{
     @Autowired
     private UserEntityRepository userEntityRepository;
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -33,7 +33,8 @@ public class UserEntityServiceImpl implements UserEntityService{
         user.setId(userDTO.getId());
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
-        user.setPw(userDTO.getPw());
+        user.setPw(passwordEncoder.encode(userDTO.getPw())); // 비밀번호 암호화
+        userEntityRepository.save(user);
     }
 
     @Override
