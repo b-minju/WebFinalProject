@@ -3,6 +3,7 @@ package kr.ac.kopo.midtermproject.controller;
 import jakarta.servlet.http.HttpSession;
 import kr.ac.kopo.midtermproject.service.UserEntityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
+    @Autowired
     private UserEntityService userEntityService;
 
 //    @GetMapping("/checkId/{id}")

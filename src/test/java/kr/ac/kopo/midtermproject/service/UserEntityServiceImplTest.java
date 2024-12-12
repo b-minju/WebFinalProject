@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.IntStream;
 
@@ -20,21 +22,24 @@ class UserEntityServiceImplTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
+    @Transactional
+    @Rollback(value = false)
     public void register() {
-        IntStream.rangeClosed(1, 10).forEach(i -> {
+        IntStream.rangeClosed(1, 30).forEach(i -> {
             UserEntity user = new UserEntity();
             user.setId("user" + i);
             user.setName("사용자" + i);
             user.setEmail("user"+i+"@kopo.ac.kr");
-            user.setPw(passwordEncoder.encode("1234")); // 비밀번호 암호화
+            String encodedPw = passwordEncoder.encode("1234");
+            user.setPw(encodedPw); // 비밀번호 암호화
 
             user.addUserRole(UserEntityRole.USER);
 
-            if (i > 8) {
+            if (i > 20) {
                 user.addUserRole(UserEntityRole.MANAGER);
             }
 
-            if (i > 9) {
+            if (i > 25) {
                 user.addUserRole(UserEntityRole.ADMIN);
             }
 
