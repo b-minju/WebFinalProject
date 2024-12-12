@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notice Detail</title>
+    <title>Notice Detail with Comments</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,7 +18,7 @@
             text-align: center;
             margin-bottom: 48px;
         }
-        .main-title :hover {
+        .main-title:hover {
             color: dimgrey;
         }
         .container {
@@ -60,6 +60,24 @@
             border: 1px solid #121212;
             margin: 10px;
         }
+        .comment-section {
+            margin-top: 30px;
+        }
+        .comment-list {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        .comment-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .comment-actions {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
@@ -93,7 +111,18 @@
             <label for="content">내용</label>
             <textarea id="content" name="content" rows="10" readonly>[[${dto.content}]]</textarea>
         </div>
-        <br>
+
+        <div class="comment-section">
+            <h3>댓글</h3>
+            <div class="form-group">
+                <textarea id="new-comment" name="newComment" rows="3" placeholder="댓글을 입력하세요..."></textarea>
+                <button class="submit-btn" id="add-comment-btn">댓글 등록</button>
+            </div>
+            <div class="comment-list" id="comment-list">
+                <!-- Comments will be dynamically inserted here -->
+            </div>
+        </div>
+
         <div style="display: flex; justify-content: center; margin-top: 20px;">
             <a th:href="@{/notice/modify(num=${dto.num}, page=${requestDTO.page}, type=${requestDTO.type}, keyword=${requestDTO.keyword})}">
                 <button class="submit-btn">수정</button>
@@ -104,22 +133,98 @@
         </div>
     </div>
 </div>
-<script th:inline="javascript">
-    $(".listBtn").click(function () {
-        var page = $("input[name='page']");
-        var type = $("input[name='type']");
-        var keyword = $("input[name='keyword']");
+<script>
+    // 페이지 로딩 시 댓글 목록 로드
+    window.onload = function() {
+        const noticeNum = [[${dto.num}]]; // notice num을 Thymeleaf로 전달받아 사용
+        loadComments(noticeNum); // 댓글 목록 불러오기
+    };
 
-        actionForm.empty();
+    // 댓글 목록 로딩
+    function loadComments(noticeNum) {
+        fetch(`/reviews/${noticeNum}/all`)
+            .then(response => response.json())
+            .then(data => {
+                const commentList = document.getElementById('comment-list');
+                commentList.innerHTML = ''; // 기존 댓글 목록 초기화
+                data.forEach(comment => {
+                    const commentItem = document.createElement('div');
+                    commentItem.className = 'comment-item';
 
-        actionForm.append(page);
-        actionForm.append(type);
-        actionForm.append(keyword);
+                    const commentText = document.createElement('p');
+                    commentText.textContent = comment.text;
 
-        actionForm.attr("action", "/notice/list")
-            .attr("method", "get")
-            .submit();
+                    const actions = document.createElement('div');
+                    actions.className = 'comment-actions';
+
+                    const deleteBtn = document.createElement('button');
+                    deleteBtn.textContent = '삭제';
+                    deleteBtn.addEventListener('click', function () {
+                        removeComment(noticeNum, comment.reviewnum); // 댓글 삭제 시 필요한 번호들
+                    });
+
+                    actions.appendChild(deleteBtn);
+                    commentItem.appendChild(commentText);
+                    commentItem.appendChild(actions);
+
+                    commentList.appendChild(commentItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    // 댓글 등록
+    document.getElementById('add-comment-btn').addEventListener('click', function () {
+        const newComment = document.getElementById('new-comment').value;
+        const noticeNum = [[${dto.num}]]; // notice num을 Thymeleaf로 전달받아 사용
+
+        if (newComment.trim() === '') {
+            alert('댓글을 입력하세요!');
+            return;
+        }
+
+        // 댓글을 서버에 추가
+        fetch(`/reviews/${noticeNum}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                text: newComment,
+                noticeNum: noticeNum, // 공지사항 번호 포함
+                writerName: '작성자', // 실제로 작성자 정보를 처리해야 합니다.
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert('댓글이 등록되었습니다.');
+                loadComments(noticeNum); // 댓글 목록 새로 고침
+                document.getElementById('new-comment').value = ''; // 입력 필드 초기화
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('댓글 등록에 실패했습니다.');
+            });
     });
+
+    // 댓글 삭제
+    function removeComment(noticeNum, reviewnum) {
+        fetch(`/reviews/${noticeNum}/${reviewnum}`, {
+            method: 'DELETE',
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert('댓글이 삭제되었습니다.');
+                loadComments(noticeNum); // 댓글 목록 새로 고침
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('댓글 삭제에 실패했습니다.');
+            });
+    }
 </script>
+
 </body>
 </html>

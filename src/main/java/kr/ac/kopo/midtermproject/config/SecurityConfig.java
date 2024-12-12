@@ -30,7 +30,7 @@ public class SecurityConfig {
         httpSecurity.httpBasic(AbstractHttpConfigurer::disable);
 
         httpSecurity.authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/notice/**").hasAnyRole("USER", "ADMIN", "MANAGER") // "/notice/"로 시작하는 모든 요청에 대해 USER, ADMIN, MANAGER 역할 허용
+//                .requestMatchers("/notice/**").hasAnyRole("USER", "ADMIN", "MANAGER") // "/notice/"로 시작하는 모든 요청에 대해 USER, ADMIN, MANAGER 역할 허용
                 .anyRequest().permitAll() // 그 외의 요청은 인증 없이 허용
         );
 
