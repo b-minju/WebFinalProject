@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 @RequiredArgsConstructor
@@ -28,12 +29,12 @@ public class UserEntityServiceImpl implements UserEntityService{
     }
 
     @Override
-    public void register(UserDTO userDTO) {
+    public void register(String name, String id, String email, String pw) {
         UserEntity user = new UserEntity();
-        user.setId(userDTO.getId());
-        user.setName(userDTO.getName());
-        user.setEmail(userDTO.getEmail());
-        user.setPw(passwordEncoder.encode(userDTO.getPw())); // 비밀번호 암호화
+        user.setId(id);
+        user.setName(name);
+        user.setEmail(email);
+        user.setPw(passwordEncoder.encode(pw)); // 비밀번호 암호화
         userEntityRepository.save(user);
     }
 

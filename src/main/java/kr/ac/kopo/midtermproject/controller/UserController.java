@@ -1,6 +1,7 @@
 package kr.ac.kopo.midtermproject.controller;
 
 import jakarta.servlet.http.HttpSession;
+import kr.ac.kopo.midtermproject.entity.UserEntity;
 import kr.ac.kopo.midtermproject.service.UserEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,24 @@ public class UserController {
 //
 //    @PostMapping("/matchPw")
 //    public ResponseEntity<Boolean> matchPw(@RequestBody)
+
+    @PostMapping("/signUp")
+    public ResponseEntity<String> signUp(@RequestParam String name,
+                                         @RequestParam String id,
+                                         @RequestParam String email,
+                                         @RequestParam String pw
+                                         ) {
+        if (name.isEmpty()) return ResponseEntity.badRequest().body("이름을 기입하세요.");
+        if (id.isEmpty()) return ResponseEntity.badRequest().body("아이디를 기입하세요.");
+        if (email.isEmpty()) return ResponseEntity.badRequest().body("이메일을 기입하세요.");
+        if (pw.isEmpty()) return ResponseEntity.badRequest().body("비밀번호를 기입하세요.");
+
+        if (userEntityService.checkId(id)) {
+            userEntityService.register(name, id, email, pw);
+            return ResponseEntity.ok("가입 완료");
+        }
+        else return ResponseEntity.status(401).body("id already exists");
+    }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String id,

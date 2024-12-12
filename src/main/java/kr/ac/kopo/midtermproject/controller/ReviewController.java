@@ -19,8 +19,8 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     // 댓글 목록 조회
-    @GetMapping("/{num}/all")
-    public ResponseEntity<List<ReviewDTO>> getList(@PathVariable("num") Long num){
+    @GetMapping("/{noticeNum}/all")
+    public ResponseEntity<List<ReviewDTO>> getList(@PathVariable("noticeNum") Long num){
         log.info("--------------list---------------");
         log.info("NUM: " + num);
 
@@ -30,34 +30,34 @@ public class ReviewController {
     }
 
     // 댓글 추가
-    @PostMapping("/{num}")
-    public ResponseEntity<Long> addReview(@PathVariable("num") Long num, @RequestBody ReviewDTO noticeReviewDTO){
+    @PostMapping("/{noticeNum}")
+    public ResponseEntity<Long> addReview(@PathVariable("noticeNum") Long num, @RequestBody ReviewDTO reviewDTO){
         log.info("--------------add noticeReview---------------");
-        log.info("reviewDTO: " + noticeReviewDTO);
+        log.info("reviewDTO: " + reviewDTO);
 
-        noticeReviewDTO.setNum(num); // noticeNum 설정
-        Long reviewnum = reviewService.register(noticeReviewDTO);
+        reviewDTO.setNum(num); // noticeNum 설정
+        Long reviewnum = reviewService.register(reviewDTO);
 
         return new ResponseEntity<>( reviewnum, HttpStatus.OK);
     }
 
     // 댓글 수정
-    @PutMapping("/{num}/{reviewnum}")
-    public ResponseEntity<Long> modifyReview(@PathVariable Long reviewnum,
-                                             @RequestBody ReviewDTO noticeReviewDTO){
-        log.info("---------------modify noticeReview--------------" + reviewnum);
-        log.info("reviewDTO: " + noticeReviewDTO);
+    @PutMapping("/{noticeNum}/{reviewNum}")
+    public ResponseEntity<Long> modifyReview(@PathVariable Long reviewNum,
+                                             @RequestBody ReviewDTO reviewDTO){
+        log.info("---------------modify noticeReview--------------" + reviewNum);
+        log.info("reviewDTO: " + reviewDTO);
 
-        reviewService.modify(noticeReviewDTO);
+        reviewService.modify(reviewDTO);
 
-        return new ResponseEntity<>( reviewnum, HttpStatus.OK);
+        return new ResponseEntity<>( reviewNum, HttpStatus.OK);
     }
 
     // 댓글 삭제
-    @DeleteMapping("/{num}/{reviewNum}")
+    @DeleteMapping("/{noticeNum}/{reviewNum}")
     public ResponseEntity<Long> removeReview(@PathVariable Long reviewNum){
-        log.info("---------------remove noticeReview--------------");
-        log.info("reviewnum: " + reviewNum);
+        log.info("---------------remove review--------------");
+        log.info("reviewNum: " + reviewNum);
 
         reviewService.remove(reviewNum);
 

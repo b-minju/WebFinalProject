@@ -6,7 +6,7 @@ public interface UserEntityService {
 //    회원가입
     boolean checkId(String id);
     boolean matchPw(String pw, String confirmPw);
-    void register(UserDTO userDTO);
+    void register(String name, String id, String email, String pw);
 
 //    로그인
     boolean logIn(String id, String pw);
